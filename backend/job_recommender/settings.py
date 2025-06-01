@@ -48,17 +48,18 @@ print("\n")
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 STATIC_URL = '/static/'
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'frontend')
-# ]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'frontend')
+]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-2+=k2w)cea-!437@fzp(_0j18kdm=^^3&-u*acma7+ha%qe9dp'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS =['127.0.0.1', 'localhost'] # Allow all hosts for now
+ALLOWED_HOSTS =['127.0.0.1', 'localhost','gunicorn'] # Allow all hosts for now
 
 # Application definition
 
