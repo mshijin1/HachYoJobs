@@ -16,12 +16,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.http import HttpResponseRedirect
 from django.conf import settings
 from django.conf.urls.static import static
+import requests
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
+    # path('', lambda request: HttpResponseRedirect('/upload_resume/')),
     path('upload_resume/', include('resume_uploads.urls')), # Connect the resume_uploads app to the project
+    path('find_Category/', include('find_Category.urls')),
+    path('scrap/',include('scrapper.urls')),
 ]
 
 

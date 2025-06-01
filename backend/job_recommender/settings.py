@@ -17,6 +17,10 @@ FILE_UPLOAD_MAX_MEMORY_SIZE = 52428800  # 50 MB
 
 from pathlib import Path
 import os
+# settings.py
+import socket
+socket.setdefaulttimeout(60)  # Set to 60 seconds
+SECURE_SSL_REDIRECT=False
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent # location to store files
@@ -66,8 +70,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'resume_uploads', # Add the resume_uploads app to the list of installed apps
+    'find_Category', # Add the find_Category app to the list of installed apps
     'corsheaders', # Add the corsheaders app to the list of installed apps
+    'scrapper',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -80,16 +87,28 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware', # Add the CorsMiddleware to the list of middleware
 ]
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Use database-based session storage
+SESSION_COOKIE_AGE = 3600  # Session expires in 1 hour
+SESSION_SAVE_EVERY_REQUEST = True  # Save session on every request
+
 CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8000",
+    "http://localhost:8001",
     "http://127.0.0.1:5500",  # Example for another allowed frontend (e.g., from Live Server extension)
-    "http://127.0.0.1:5501"
+    "http://127.0.0.1:5501",
+    "http://127.0.0.1:5502"
 ]
 
 X_FRAME_OPTIONS = 'ALLOWALL'
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'resume_cache',
+    }
+}
 
 
 
